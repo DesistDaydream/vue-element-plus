@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue"
 import type { FormInstance } from "element-plus"
 
-// 与 el-form 组件的 ref 属性的值相同时，将会自动关联
+// 与 el-form 组件的 ref 属性的值相同时，将会自动关联，用以获取 el-form 组件的实例
 const ruleFormRef = ref<FormInstance>()
 
 // 自定义的验证规则。
@@ -12,7 +12,8 @@ const validatePass = (rule: any, value: any, callback: any) => {
   } else {
     if (ruleForm.checkPass !== "") {
       if (!ruleFormRef.value) return
-      ruleFormRef.value.validateField("检查密码", () => null)
+      // validataField() 的第一个参数是 prop 的值
+      ruleFormRef.value.validateField("checkPass", () => null)
     }
     callback()
   }
@@ -73,6 +74,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
+      console.log("用户名：", ruleForm.username)
+      console.log("密码：", ruleForm.pass)
+      console.log("年龄：", ruleForm.age)
+
       console.log("submit!")
     } else {
       console.log("error submit!")

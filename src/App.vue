@@ -24,7 +24,7 @@ const handleClose = (key: string, keyPath: string[]) => {
             <el-icon><icon-menu /></el-icon>
             <span>表单</span>
           </template>
-          <el-menu-item index="fomr" route="form">基础表单</el-menu-item>
+          <el-menu-item index="fomr" route="/form">基础表单</el-menu-item>
           <el-menu-item index="form-validation" route="/form/validation">表单校验</el-menu-item>
         </el-sub-menu>
 
