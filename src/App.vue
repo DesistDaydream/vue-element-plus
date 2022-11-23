@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RouterLink, RouterView } from "vue-router"
+import { RouterView } from "vue-router"
 import {
   Document,
   Menu as IconMenu,
@@ -24,7 +24,18 @@ const handleClose = (key: string, keyPath: string[]) => {
         @open="handleOpen"
         @close="handleClose"
         router>
-        <el-sub-menu index="1">
+        <el-sub-menu index="form">
+          <template #title>
+            <el-icon><icon-menu /></el-icon>
+            <span>表单</span>
+          </template>
+          <el-menu-item index="fomr" route="form">基础表单</el-menu-item>
+          <el-menu-item index="form-validation" route="/form/validation">
+            自定义校验规则
+          </el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="table">
           <template #title>
             <el-icon><SwitchFilled /></el-icon>
             <span>表格</span>
@@ -40,15 +51,6 @@ const handleClose = (key: string, keyPath: string[]) => {
             <template #title>item four</template>
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-sub-menu>
-        </el-sub-menu>
-
-        <el-sub-menu index="2">
-          <template #title>
-            <el-icon><icon-menu /></el-icon>
-            <span>第二部分</span>
-          </template>
-          <el-menu-item index="2-1">item one</el-menu-item>
-          <el-menu-item index="2-2">item two</el-menu-item>
         </el-sub-menu>
 
         <el-menu-item index="3" disabled>
