@@ -2,9 +2,10 @@
 import { reactive, ref } from "vue"
 import type { FormInstance } from "element-plus"
 
+// 与 el-form 组件的 ref 属性的值相同时，将会自动关联
 const ruleFormRef = ref<FormInstance>()
 
-// 验证第一个表单的逻辑
+// 自定义的验证规则。
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === "") {
     callback(new Error("请输入密码"))
@@ -16,8 +17,6 @@ const validatePass = (rule: any, value: any, callback: any) => {
     callback()
   }
 }
-
-// 验证第二个表单的逻辑
 const validatePass2 = (rule: any, value: any, callback: any) => {
   if (value === "") {
     callback(new Error("请再次输入密码"))
@@ -27,8 +26,6 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
     callback()
   }
 }
-
-// 验证第三个表单的逻辑
 const validateAge = (rule: any, value: any, callback: any) => {
   if (!value) {
     return callback(new Error("请输入年龄"))
@@ -48,14 +45,24 @@ const validateAge = (rule: any, value: any, callback: any) => {
 
 // 表单数据
 const ruleForm = reactive({
-  account: "",
+  username: "",
   pass: "",
   checkPass: "",
   age: "",
 })
 
 // 表单验证规则
+// reactive() 中对象内属性的 key 要与 prop 属性的值一致。
 const rules = reactive({
+  // 内置的验证规则
+  username: [
+    // required: true 表示必填
+    // message: 表示验证不通过时的提示信息
+    // tigger: 表示触发验证的时机。可用的值有 blur(表示失去焦点时触发验证) | change(表示值发生改变时触发验证)
+    { required: true, message: "请输入用户名", trigger: "blur" },
+    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+  ],
+  // 自定义验证规则
   pass: [{ validator: validatePass, trigger: "blur" }],
   checkPass: [{ validator: validatePass2, trigger: "blur" }],
   age: [{ validator: validateAge, trigger: "blur" }],
@@ -87,8 +94,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
     :rules="rules"
     label-width="120px"
     class="demo-ruleForm">
-    <el-form-item label="账号" prop="account">
-      <el-input v-model="ruleForm.account" type="text" autocomplete="off" />
+    <el-form-item label="账号" prop="username">
+      <el-input v-model="ruleForm.username" type="text" autocomplete="off" />
     </el-form-item>
 
     <el-form-item label="密码" prop="pass">

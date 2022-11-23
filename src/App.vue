@@ -1,11 +1,6 @@
 <script lang="ts" setup>
 import { RouterView } from "vue-router"
-import {
-  Document,
-  Menu as IconMenu,
-  SwitchFilled,
-  Setting,
-} from "@element-plus/icons-vue"
+import { Document, Menu as IconMenu, SwitchFilled, Setting } from "@element-plus/icons-vue"
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -30,9 +25,7 @@ const handleClose = (key: string, keyPath: string[]) => {
             <span>表单</span>
           </template>
           <el-menu-item index="fomr" route="form">基础表单</el-menu-item>
-          <el-menu-item index="form-validation" route="/form/validation">
-            自定义校验规则
-          </el-menu-item>
+          <el-menu-item index="form-validation" route="/form/validation">表单校验</el-menu-item>
         </el-sub-menu>
 
         <el-sub-menu index="table">
