@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: "/table",
       name: "table",
-      component: () => import("../views/TableView.vue"),
+      component: () => import("../views/table/index.vue"),
     },
   ],
 })
