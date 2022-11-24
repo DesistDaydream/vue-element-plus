@@ -55,16 +55,13 @@ const erweimaTableData = [
 <template>
   <h1>表格</h1>
   <div>
-    <el-table
-      id="out-table"
-      :data="erweimaTableData"
-      border
-      style="width: 100%">
+    <el-table id="out-table" :data="erweimaTableData" border style="width: 100%">
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="className" label="班级"></el-table-column>
       <el-table-column prop="gender" label="性别"></el-table-column>
       <el-table-column prop="studentId" label="学号"></el-table-column>
       <el-table-column prop="qrCode" label="图片">
+        <!-- 默认插槽可以获取到 row、column、$index -->
         <template #default="scope">
           <img :src="scope.row.thumbnail" min-width="70" height="70" />
         </template>
